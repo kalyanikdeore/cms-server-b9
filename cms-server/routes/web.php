@@ -18,9 +18,9 @@ use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\BlogPostController;
 use App\Http\Controllers\Api\NatureTherapyController; 
 use App\Http\Controllers\Api\PracticedSectionController;
-// use App\Http\Controllers\Api\PatientStoryController;
+use App\Http\Controllers\Api\PatientStoryController;
 use App\Http\Controllers\Api\AwardController;
-// use App\Http\Controllers\Api\TestimonialController;
+use App\Http\Controllers\Api\TestimonialController;
 use App\Http\Controllers\Api\TherapyFeatureController;
 use App\Http\Controllers\Api\TherapySolutionController;
 
@@ -52,9 +52,9 @@ Route::get('/blog/category/{category}', [BlogController::class, 'byCategory']);
 Route::get('/blog/{slug}', [BlogController::class, 'show']);
 Route::get('/naturetherapy', [NatureTherapyController::class, 'index']);
 Route::get('/practiced-section', [PracticedSectionController::class, 'index']);
-// Route::get('/patient-stories', [PatientStoryController::class, 'index']);
+Route::get('/patient-stories', [PatientStoryController::class, 'index']);
 Route::get('/awards', [AwardController::class, 'index']);
-// Route::get('/testimonials', [TestimonialController::class, 'index']);
+Route::get('/testimonials', [TestimonialController::class, 'index']);
 Route::get('/therapy-features', [TherapyFeatureController::class, 'index']);
 Route::get('/therapy-solutions', [TherapySolutionController::class, 'index']);
 // homepage - final
