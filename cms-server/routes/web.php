@@ -23,10 +23,9 @@ use App\Http\Controllers\Api\AwardController;
 use App\Http\Controllers\Api\TestimonialController;
 use App\Http\Controllers\Api\TherapyFeatureController;
 use App\Http\Controllers\Api\TherapySolutionController;
+use App\Http\Controllers\ProcessAchievementController;
+use App\Http\Controllers\Api\ProcessResilienceController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 
 Route::prefix('/api')->controller(HomeController::class)->group(function () {
@@ -57,6 +56,9 @@ Route::get('/awards', [AwardController::class, 'index']);
 Route::get('/testimonials', [TestimonialController::class, 'index']);
 Route::get('/therapy-features', [TherapyFeatureController::class, 'index']);
 Route::get('/therapy-solutions', [TherapySolutionController::class, 'index']);
+Route::get('/process-achievements', [ProcessAchievementController::class, 'index']);
+Route::get('/process-resilience', [ProcessResilienceController::class, 'index']);
+
 // homepage - final
 
 }); 

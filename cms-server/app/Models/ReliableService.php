@@ -19,6 +19,7 @@ protected $fillable = [
     'order',
 ];
 
+
     protected $casts = [
         'is_active' => 'boolean',
         'order' => 'integer',
