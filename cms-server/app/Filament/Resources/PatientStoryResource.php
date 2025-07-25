@@ -11,7 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-    use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PatientStoryResource extends Resource
 {
@@ -32,7 +32,9 @@ class PatientStoryResource extends Resource
                 ->columnSpanFull(),
             Forms\Components\FileUpload::make('image')
                 ->image()
-                ->directory('patient-stories'),
+                ->directory('patient-stories')
+                ->disk('public_uploads')
+                ->required(),
             Forms\Components\Toggle::make('is_featured')
                 ->label('Is Featured?'),
             Forms\Components\TextInput::make('sort_order')
@@ -46,7 +48,9 @@ class PatientStoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')->searchable(),
-                Tables\Columns\ImageColumn::make('image'),
+                Tables\Columns\ImageColumn::make('image')
+                    ->disk('public_uploads')
+                    ->url(fn ($record) => asset('uploads/' . $record->image)),
                 Tables\Columns\ToggleColumn::make('is_featured'),
                 Tables\Columns\TextColumn::make('sort_order')->sortable(),
                 Tables\Columns\TextColumn::make('created_at')

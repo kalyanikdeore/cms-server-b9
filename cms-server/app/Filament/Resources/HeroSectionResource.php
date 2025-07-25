@@ -32,14 +32,14 @@ class HeroSectionResource extends Resource
                 Forms\Components\Textarea::make('description')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\FileUpload::make('video_path')
-                    ->label('Hero Video')
-                    ->directory('hero-videos')
-                    ->disk('public_uploads')    
-                    ->acceptedFileTypes(['video/mp4'])
-                    
-                    ->preserveFilenames()
-                    ->required(),
+          // In HeroSectionResource.php
+Forms\Components\FileUpload::make('video_path')
+    ->label('Hero Video')
+    ->directory('hero-videos')
+    ->disk('public') // Changed from public_uploads to public
+    ->acceptedFileTypes(['video/mp4'])
+    ->preserveFilenames()
+    ->required(),
                 Forms\Components\Toggle::make('is_active')
                     ->required(),
                 Forms\Components\TextInput::make('order')

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class ProcessResilience extends Model
 {
@@ -17,27 +18,23 @@ class ProcessResilience extends Model
         'is_active'
     ];
 
-    protected $casts = [
-        'is_active' => 'boolean'
-    ];
-
-    // Get the URLs for both videos
-    public function getVideo1UrlAttribute()
-    {
-        return $this->video1 ? asset('storage/'.$this->video1) : null;
-    }
-
-    public function getVideo2UrlAttribute()
-    {
-        return $this->video2 ? asset('storage/'.$this->video2) : null;
-    }
-
-    // Get all active videos (non-null)
+    /**
+     * Get the active videos with full URLs
+     *
+     * @return array
+     */
     public function getActiveVideosAttribute()
     {
-        return array_filter([
-            $this->video1_url,
-            $this->video2_url
-        ]);
+        $videos = [];
+        
+        if ($this->video1) {
+            $videos[] = Storage::disk('public_uploads')->url($this->video1);
+        }
+        
+        if ($this->video2) {
+            $videos[] = Storage::disk('public_uploads')->url($this->video2);
+        }
+        
+        return $videos;
     }
 }

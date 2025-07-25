@@ -10,6 +10,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use App\Filament\Resources\ProcessResilienceResource\Pages;
 
+
+
 class ProcessResilienceResource extends Resource
 {
     protected static ?string $model = ProcessResilience::class;
@@ -33,14 +35,18 @@ class ProcessResilienceResource extends Resource
                 Forms\Components\FileUpload::make('video1')
                     ->label('First Video')
                     ->directory('process-resilience/videos')
-                    ->acceptedFileTypes(['video/mp4'])
+                    ->disk('public_uploads')
+                    ->acceptedFileTypes(['video/mp4', 'video/webm', 'video/ogg'])
+                    ->maxSize(10240) // 10MB
                     ->required()
                     ->columnSpanFull(),
                     
                 Forms\Components\FileUpload::make('video2')
                     ->label('Second Video')
                     ->directory('process-resilience/videos')
-                    ->acceptedFileTypes(['video/mp4'])
+                    ->disk('public_uploads')
+                    ->acceptedFileTypes(['video/mp4', 'video/webm', 'video/ogg'])
+                    ->maxSize(10240) // 10MB
                     ->required()
                     ->columnSpanFull(),
                     

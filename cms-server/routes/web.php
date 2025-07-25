@@ -23,13 +23,22 @@ use App\Http\Controllers\Api\AwardController;
 use App\Http\Controllers\Api\TestimonialController;
 use App\Http\Controllers\Api\TherapyFeatureController;
 use App\Http\Controllers\Api\TherapySolutionController;
-use App\Http\Controllers\ProcessAchievementController;
+use App\Http\Controllers\Api\ProcessAchievementController;
 use App\Http\Controllers\Api\ProcessResilienceController;
+use App\Http\Controllers\Api\DepartmentProcessController;
+use App\Http\Controllers\Api\WhyB9ConceptController;
+use App\Http\Controllers\Api\ComparisonItemController;
+use App\Http\Controllers\Api\TreatmentComparisonController;
+use App\Http\Controllers\Api\CtaSectionController;
+use App\Http\Controllers\Api\CommunityAchievementController;
+use App\Http\Controllers\Api\HealthResilienceFeatureController;
+use App\Http\Controllers\Api\ContactSettingController;
+use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\TherapyServiceController;
+// use App\Http\Controllers\Api\TherapyPlatformController;
 
 
-
-Route::prefix('/api')->controller(HomeController::class)->group(function () {
-  
+Route::prefix('/api')->controller(HomeController::class)->group(function () { 
 Route::get('/hero-sections', [HeroSectionController::class, 'index']);
 Route::get('/about-nature-therapy', [AboutNatureTherapyController::class, 'index']);
 Route::get('/services', [ServiceController::class, 'index']);
@@ -49,7 +58,7 @@ Route::get('/blog/recent', [BlogController::class, 'recent']);
 Route::get('/categories', [BlogController::class, 'byCategory']);
 Route::get('/blog/category/{category}', [BlogController::class, 'byCategory']);
 Route::get('/blog/{slug}', [BlogController::class, 'show']);
-Route::get('/naturetherapy', [NatureTherapyController::class, 'index']);
+Route::get('nature-therapies', [NatureTherapyController::class, 'index']);
 Route::get('/practiced-section', [PracticedSectionController::class, 'index']);
 Route::get('/patient-stories', [PatientStoryController::class, 'index']);
 Route::get('/awards', [AwardController::class, 'index']);
@@ -58,7 +67,19 @@ Route::get('/therapy-features', [TherapyFeatureController::class, 'index']);
 Route::get('/therapy-solutions', [TherapySolutionController::class, 'index']);
 Route::get('/process-achievements', [ProcessAchievementController::class, 'index']);
 Route::get('/process-resilience', [ProcessResilienceController::class, 'index']);
-
-// homepage - final
-
+Route::get('/department-processes', [DepartmentProcessController::class, 'index']);
+// Route::get('/why-b9-concept', [WhyB9ConceptController::class, 'index']);
+Route::get('/why-b9-concept', [WhyB9ConceptController::class, 'index']);
+Route::get('/comparison-items', [ComparisonItemController::class, 'index']);
+Route::get('/treatment-comparison', [TreatmentComparisonController::class, 'index']);
+Route::apiResource('cta-section', \App\Http\Controllers\Api\CtaSectionController::class);
+Route::get('cta-section/active', [\App\Http\Controllers\Api\CtaSectionController::class, 'getActiveCta']);
+Route::get('/community-achievements', [\App\Http\Controllers\Api\CommunityAchievementController::class, 'index']);
+Route::get('/health-resilience-features', [HealthResilienceFeatureController::class, 'index']);
+Route::get('/contact-settings', [ContactSettingController::class, 'index']);
+Route::get('/contact', [ContactController::class, 'index']);
+Route::get('/therapy-services', [TherapyServiceController::class, 'index']);
+// Route::get('/therapy-platform', [TherapyPlatformController::class, 'index']);
 }); 
+
+  

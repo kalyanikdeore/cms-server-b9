@@ -1,38 +1,54 @@
 <?php
-// app/Http/Controllers/Api/AwardController.php
+// app/Http/Controllers/Api/NatureTherapyController.php
 
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Award;
+use App\Models\NatureTherapy;
 use Illuminate\Http\Request;
 
-class AwardController extends Controller
+class NatureTherapyController extends Controller
 {
     public function index()
     {
-        $awards = Award::active()->ordered()->get();
+        $therapies = NatureTherapy::all();
         
         return response()->json([
             'success' => true,
-            'data' => $awards
+            'data' => $therapies->map(function ($therapy) {
+                return [
+                    'id' => $therapy->id,
+                    'title' => $therapy->title,
+                    'subtitle' => $therapy->subtitle,
+                    'background_image_url' => $therapy->background_image 
+                        ? asset('storage/'.$therapy->background_image)
+                        : null,
+                ];
+            })
         ]);
     }
 
     public function show($id)
     {
-        $award = Award::find($id);
+        $therapy = NatureTherapy::find($id);
         
-        if (!$award) {
+        if (!$therapy) {
             return response()->json([
                 'success' => false,
-                'message' => 'Award not found'
+                'message' => 'Nature therapy not found'
             ], 404);
         }
         
         return response()->json([
             'success' => true,
-            'data' => $award
+            'data' => [
+                'id' => $therapy->id,
+                'title' => $therapy->title,
+                'subtitle' => $therapy->subtitle,
+                'background_image_url' => $therapy->background_image 
+                    ? asset('storage/'.$therapy->background_image)
+                    : null,
+            ]
         ]);
     }
 }

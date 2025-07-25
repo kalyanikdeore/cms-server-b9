@@ -12,11 +12,10 @@ use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
+
 class NatureTherapyResource extends Resource
 {
     protected static ?string $model = NatureTherapy::class;
-
-    // Using a valid Heroicon (tree instead of leaf)
     protected static ?string $navigationIcon = 'heroicon-o-sparkles';
 
     public static function form(Form $form): Form
@@ -32,7 +31,8 @@ class NatureTherapyResource extends Resource
                     ->maxLength(255),
                 
                 Forms\Components\FileUpload::make('background_image')
-                    ->image()
+                    ->label('Image')
+                    ->disk('public_uploads')
                     ->directory('nature-therapy')
                     ->getUploadedFileNameForStorageUsing(
                         function (TemporaryUploadedFile $file): string {
@@ -40,7 +40,9 @@ class NatureTherapyResource extends Resource
                         }
                     )
                     ->required()
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->image()
+                    ->imageEditor(),
             ]);
     }
 
@@ -49,6 +51,7 @@ class NatureTherapyResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('background_image')
+                    ->disk('public_uploads')
                     ->size(100),
                     
                 Tables\Columns\TextColumn::make('title')

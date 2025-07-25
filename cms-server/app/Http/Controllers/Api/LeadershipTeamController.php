@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-use App\Models\LeadershipTeam; // ✅ Import the model here 
+use App\Models\LeadershipTeam; 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
